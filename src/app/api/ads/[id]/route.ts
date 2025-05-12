@@ -81,32 +81,25 @@ export async function PUT(req: NextRequest) {
 }
 
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest) {
   try {
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // gets the [id] part from URL
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.email) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const ad = await prisma.ad.delete({
       where: {
-        id: params.id,
+        id: id!,
         userEmail: session.user.email,
       },
     });
 
     return NextResponse.json(ad);
   } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
