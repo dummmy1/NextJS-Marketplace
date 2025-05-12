@@ -20,9 +20,9 @@ export default function AdInputs() {
         <option value="" disabled>
           Select Category
         </option>
-        <option value="motorized">🛵 Motorized vehicles</option>
-        <option value="electronics">⚡ Electronics</option>
-        <option value="others">🔎 Others</option>
+        <option value="🧸 Toys">🧸 Toys</option>
+        <option value="⚡ Electronics">⚡ Electronics</option>
+        <option value="🔎 others">🔎 Others</option>
       </select>
 
       <label htmlFor="description" className="font-semibold">

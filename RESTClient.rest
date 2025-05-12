@@ -1,5 +1,6 @@
-### Create Ad (local)
-POST http://localhost:3000/api/ads
+### Create Ad (change POST address to vercel after hosting so i can check it then too with that button) / use the .env var
+
+POST http://localhost:3000/api/ads/[id]
 Content-Type: application/json
 Cookie: next-auth.session-token={{$dotenv COOKIE}}
 

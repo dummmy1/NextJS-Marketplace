@@ -7,6 +7,7 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function NewAdPage() {
   type MyUploadResponse = {
@@ -20,6 +21,7 @@ export default function NewAdPage() {
   const [files, setFiles] = useState<MyUploadResponse[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const fileInRef = createRef();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,14 +38,18 @@ export default function NewAdPage() {
       imageUrl: file.url,
     };
 
-    const res = await fetch("/api/ads", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/ads/[id]`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
 
     if (res.ok) {
       alert("Ad created!");
+      router.push("/account");
     } else {
       alert("Something went wrong.");
     }
