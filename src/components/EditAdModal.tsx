@@ -45,7 +45,6 @@ export default function EditAdModal({
       onSave(formData);
     } catch (error) {
       console.error("Update error:", error);
-      alert(error.message);
     }
   };
   return (
