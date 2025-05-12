@@ -50,19 +50,15 @@ export async function POST(req: NextRequest) {
 }
 
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: NextRequest) {
   try {
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop(); // or parse pathname to get ID
     const session = await getServerSession(authOptions);
     const body = await req.json();
 
     if (!session?.user?.email) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     if (body.price) {
@@ -71,22 +67,19 @@ export async function PUT(
 
     const updatedAd = await prisma.ad.update({
       where: {
-        id: params.id,
+        id: id!,
         userEmail: session.user.email,
       },
-      data: body
+      data: body,
     });
 
     return NextResponse.json({ success: true, ad: updatedAd });
-
   } catch (error: any) {
     console.error("Update error:", error);
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+
 
 export async function DELETE(
   request: Request,
