@@ -15,7 +15,7 @@ export default function Header({ session }: { session: Session | null }) {
       </Link>
       <nav className="flex gap-4  *:rounded *:px-2 *:py-1">
         <Link
-          href={"/newAd"}
+          href={"/NewAdPage"}
           className="border inline-flex items-center gap-1.5 mr-6 border-blue-500 text-blue-500"
         >
           <FontAwesomeIcon className="h-4.5" icon={faPlus} />
