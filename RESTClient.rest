@@ -1,0 +1,14 @@
+### Create Ad (local)
+POST http://localhost:3000/api/ads
+Content-Type: application/json
+Cookie: next-auth.session-token={{$dotenv COOKIE}}
+
+{
+  "title": "Test Ad",
+  "price": 25.0,
+  "category": "books",
+  "description": "Lightly used book",
+  "contact": "test@example.com",
+  "imageUrl": "https://example.com/image.jpg",
+  "userEmail": "test@example.com"
+}
