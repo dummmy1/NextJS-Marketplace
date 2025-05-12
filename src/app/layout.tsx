@@ -1,6 +1,6 @@
 import { Providers } from "./providers";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import Header from "@/components/Header";
 import type { Metadata } from "next";
 import "./globals.css";

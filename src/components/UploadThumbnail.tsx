@@ -1,6 +1,10 @@
-import { UploadResponse } from "imagekit/dist/libs/interfaces";
+export type SimplifiedUpload = {
+  url: string;
+  fileId: string;
+  fileType?: string;
+};
 
-export default function UploadThumbnail({ file }: { file: UploadResponse }) {
+export default function UploadThumbnail({ file }: { file: SimplifiedUpload }) {
   if (file.fileType === "image") {
     return <img src={file.url + "?tr=w=50,h=50"} />;
   }
